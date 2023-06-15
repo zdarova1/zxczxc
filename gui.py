@@ -104,9 +104,15 @@ class App(ctk.CTk):
         #Label 
         self.label = ctk.CTkLabel(self.main_frame, corner_radius=0, text='Выберите файл и ключ для шифрования:', 
                                   image=self.lablekey_image, compound='top', anchor=ctk.CENTER,font=ctk.CTkFont(size=20, weight="bold"))
-        self.label.grid(row=0, column=2)
+        self.label.grid(row=0, column=1)
         
+        self.main_frame.rowconfigure(0, weight=1)
+        self.main_frame.rowconfigure(1, weight=1)
+        self.main_frame.rowconfigure(2, weight=1)
+        self.main_frame.rowconfigure(3, weight=1)
+        self.main_frame.columnconfigure(1, weight=1)
         
+      
         #buttons for encode page
         self.button_file = ctk.CTkButton(self.main_frame, corner_radius=0, text = 'Private key', fg_color='#C57A44', 
                                          command=lambda: self.pick_file(('Pem Files', '*.pem'), 'private_key'))
@@ -118,9 +124,9 @@ class App(ctk.CTk):
                                        command=lambda : ServerMeet(self.client, f'encode_file {basename(self.encode_file_path)}'))
         
         
-        self.button_file.grid(row=1, column = 2, sticky = 'nsew', padx=10, pady=5)
-        self.privateKey_file.grid(row=2, column = 2, sticky = 'ew', padx=10, pady=5)
-        self.sign_file.grid(row=3, column=2, sticky = 'ew', padx=10, pady=5)
+        self.button_file.grid(row=1, column = 1, sticky = 'nsew', padx=10, pady=5)
+        self.privateKey_file.grid(row=2, column = 1, sticky = 'nsew', padx=10, pady=5)
+        self.sign_file.grid(row=3, column=1, sticky = 'nsew', padx=10, pady=5)
 
 
    # def pick_and_send(self, name):
@@ -137,11 +143,14 @@ class App(ctk.CTk):
         self.main_frame.rowconfigure(1, weight=1)
         self.main_frame.rowconfigure(2, weight=1)
         self.main_frame.rowconfigure(3, weight=1)
+        self.main_frame.rowconfigure(4, weight=1)
+        self.main_frame.columnconfigure(1, weight=1)
+        
         
         self.label.columnconfigure(1, weight=1)
         
         
-        self.publicKey_file = ctk.CTkButton(self.main_frame, corner_radius=0, text = 'Public key', fg_color='#C57A44', 
+        self.publicKey_file = ctk.CTkButton(self.main_frame, corner_radius=0, text = 'Public key', fg_color='#C57A44',
                                             command=lambda: self.pick_file(('Pem Files', '*.pem'), 'public_key'))
         self.signed_file = ctk.CTkButton(self.main_frame, corner_radius=0, text = 'Signed file', fg_color='#C57A44', 
                                          command=lambda: self.pick_file(('All files', '*.*'), 'signed_file'))
@@ -152,10 +161,10 @@ class App(ctk.CTk):
                             self.VerifyFile_(path_sig = self.verify_file_path, path_source=self.source_file))
         
         
-        self.publicKey_file.grid(row=1, column = 1, sticky = 'ew', padx=10, pady=5)
-        self.signed_file.grid(row=2, column = 1, sticky = 'ew', padx=10, pady=5)
-        self.source_file.grid(row=3, column = 1, sticky = 'ew', padx=10, pady=5)
-        self.verify_file.grid(row=4, column=1, sticky = 'ew', padx=10, pady=5)
+        self.publicKey_file.grid(row=1, column = 1, sticky = 'nsew', padx=10, pady=5)
+        self.signed_file.grid(row=2, column = 1, sticky = 'nsew', padx=10, pady=5)
+        self.source_file.grid(row=3, column = 1, sticky = 'nsew', padx=10, pady=5)
+        self.verify_file.grid(row=4, column=1, sticky = 'nsew', padx=10, pady=5)
 
         
     def VerifyFile_(self, path_sig, path_source):
@@ -180,7 +189,7 @@ class App(ctk.CTk):
         self.label.grid_columnconfigure(1, weight=1)
         self.source_file2 = ctk.CTkButton(self.main_frame, corner_radius=0, text = 'Source file', fg_color='#C57A44', 
                                          command=lambda: self.pick_file(('All files', '*.*'), 'upload_file'))
-        self.source_file2.grid(row=1, column=1)
+        self.source_file2.grid(row=1, column=1, sticky = 'nsew')
         
     
          
